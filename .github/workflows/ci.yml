@@ -33,14 +33,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    # 4. Navegar al proyecto de Serenity
-    - name: Navigate to Serenity project
-      run: cd AutoE2E-Opcion2
 
-    # 5. Instalar dependencias
+    # 4. Instalar dependencias
     - name: Install dependencies
+      working-directory: ./AutoE2E-Opcion2
       run: mvn clean install -DskipTests
 
-    # 6. Ejecutar los tests
+    # 5. Ejecutar los tests
     - name: Run Serenity tests
+      working-directory: ./AutoE2E-Opcion2
       run: mvn clean verify -Denvironment=chrome
