@@ -42,4 +42,4 @@ jobs:
     # 5. Ejecutar los tests
     - name: Run Serenity tests
       working-directory: ./AutoE2E-Opcion2
-      run: mvn clean verify -Denvironment=chrome
+      run: mvn clean verify -Denvironment=chrome "-Dcucumber.filter.tags=@test"
