@@ -1,0 +1,46 @@
+name: CI Pipeline - Serenity
+
+on:
+  push:
+    branches:
+      - AutoE2ESerenity
+  pull_request:
+    branches:
+      - AutoE2ESerenity
+
+jobs:
+  build-and-test-serenity:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Configurar el repositorio
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Configurar Java
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # 3. Configurar caché de dependencias Maven
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/AutoE2E-Opcion2/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    # 4. Navegar al proyecto de Serenity
+    - name: Navigate to Serenity project
+      run: cd AutoE2E-Opcion2
+
+    # 5. Instalar dependencias
+    - name: Install dependencies
+      run: mvn clean install -DskipTests
+
+    # 6. Ejecutar los tests
+    - name: Run Serenity tests
+      run: mvn clean verify -Denvironment=chrome
