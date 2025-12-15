@@ -24,6 +24,7 @@ Feature: Buscar mascota por ID en PetStore
     * def idNuevo = response.id
     * print 'Mascota creada con ID:', idNuevo
     Given path '/pet/' + idNuevo
+    And header Accept = 'application/json'
     When method GET
     Then status 200
     * def JsonSchemaValidator = Java.type('utils.JsonSchemaValidator')
@@ -36,6 +37,7 @@ Feature: Buscar mascota por ID en PetStore
   @test @busquedaMascota @unhappyPath @E04
   Scenario Outline: Validar casos de error al buscar mascota por ID
     Given path '/pet/' + <petId>
+    And header Accept = 'application/json'
     When method GET
     Then status <expectedStatus>
     * def JsonSchemaValidator = Java.type('utils.JsonSchemaValidator')

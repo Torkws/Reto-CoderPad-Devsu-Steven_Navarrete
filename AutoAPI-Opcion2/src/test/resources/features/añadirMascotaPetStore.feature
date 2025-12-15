@@ -17,6 +17,7 @@ Feature: Añadir una nueva mascota a PetStore
     * set requestBody.id = idAleatorio
     * print 'Request Body:', requestBody
     And request requestBody
+    And header Accept = 'application/json'
     When method POST
     Then status 200
     * def JsonSchemaValidator = Java.type('utils.JsonSchemaValidator')
@@ -30,8 +31,10 @@ Feature: Añadir una nueva mascota a PetStore
   Scenario: Validar que rechaza request con body vacío
     Given path '/pet'
     And request ''
+    And header Accept = 'application/json'
     When method POST
     Then status 415
-    And match response contains { message: '#string' }
+    And match response.code == 415
+    And match response.type == 'unknown'
 
 
