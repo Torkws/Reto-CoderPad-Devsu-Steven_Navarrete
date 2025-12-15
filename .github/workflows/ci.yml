@@ -47,7 +47,7 @@ jobs:
     # 6. Subir reportes de Serenity como artifacts
     - name: Upload Serenity Reports
       if: always()  
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: serenity-reports
         path: AutoE2E-Opcion2/target/site/serenity/
