@@ -19,4 +19,9 @@ public class sdLoginPage {
             .locatedBy(".title");
     public static final Target INVENTORY_SECTION = Target.the("sección de inventario")
             .located(By.id("inventory_container"));
+
+    public static final Target ERROR_MESSAGE_LOGIN = Target.the("mensaje de error de login")
+            .locatedBy("//h3[@data-test='error']");
+
+
 }

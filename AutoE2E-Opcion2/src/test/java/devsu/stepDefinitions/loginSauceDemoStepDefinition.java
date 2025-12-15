@@ -38,4 +38,12 @@ public class loginSauceDemoStepDefinition {
         );
     }
 
+    @Then("^se debería mostrar un mensaje de error de login (.*)$")
+    public void seDeberiaMostrarUnMensajeDeError(String errMessage) {
+        OnStage.theActorInTheSpotlight().should(
+                seeThat("El mensaje de error es correcto:",
+                        commonQuestions.obtieneTextoDeUnObjeto(sdLoginPage.ERROR_MESSAGE_LOGIN), equalTo(errMessage))
+        );
+    }
+
 }

@@ -15,3 +15,13 @@ Feature: Funcionalidad de Login para E-commerce de Sauce Demo
       | performance_glitch_user | secret_sauce |
 
 
+  @test @login @E02 @unhappyPath
+  Scenario Outline: Validar mensaje de error al intentar iniciar sesión con usuario bloqueado o credenciales inválidas
+    When el usuario inicia sesión con el usuario <user> y contraseña <pass>
+    Then se debería mostrar un mensaje de error de login <messageError>
+    Examples:
+      | user            | pass         | messageError                                                              |
+      | locked_out_user | secret_sauce | Epic sadface: Sorry, this user has been locked out.                       |
+      | standard_user   | xxxx         | Epic sadface: Username and password do not match any user in this service |
+      | standard_user   |              | Epic sadface: Password is required                                                                          |
+      |                 | secret_sauce | Epic sadface: Username is required                                                                          |
