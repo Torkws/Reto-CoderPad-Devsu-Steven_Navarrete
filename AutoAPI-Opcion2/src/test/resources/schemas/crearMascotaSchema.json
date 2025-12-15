@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pet Schema",
+  "description": "Schema para validar la estructura de una mascota en PetStore API",
+  "type": "object",
+  "required": ["id", "name", "photoUrls"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "ID único de la mascota",
+      "minimum": 0
+    },
+    "category": {
+      "type": "object",
+      "description": "Categoría a la que pertenece la mascota",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Nombre de la mascota",
+      "minLength": 1
+    },
+    "photoUrls": {
+      "type": "array",
+      "description": "URLs de fotos de la mascota",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Etiquetas asociadas a la mascota",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Estado de la mascota",
+      "enum": ["available", "pending", "sold"]
+    }
+  }
+}

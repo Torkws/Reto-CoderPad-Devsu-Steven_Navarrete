@@ -1,7 +1,16 @@
-import com.intuit.karate.junit5.Karate;
+import com.intuit.karate.Results;
+import com.intuit.karate.Runner;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class runnerTest {
-    @Karate.Test
-    Karate testAll() {
-        return Karate.run("classpath:features").relativeTo(getClass());
+    
+    @Test
+    void testAll() {
+        Results results = Runner.path("classpath:features")
+                .outputCucumberJson(true)
+                .parallel(1);
+        assertEquals(0, results.getFailCount(), results.getErrorMessages());
     }
 }
+
